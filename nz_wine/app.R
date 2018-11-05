@@ -10,28 +10,40 @@
 library(shiny)
 library(tidyverse)
 library(readxl)
-
-data <- read_xlsx("Summary_of_NZ_Wines.xlsx")
+library(janitor)
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
    
    # Application title
-   titlePanel("Old Faithful Geyser Data"),
+   titlePanel("New Zealand Wine"),
    
    # Sidebar with a slider input for number of bins 
    sidebarLayout(
       sidebarPanel(
-         sliderInput("bins",
-                     "Number of bins:",
-                     min = 1,
-                     max = 50,
-                     value = 30)
+        selectInput(inputId = "x",
+                    label = "X-axis",
+                    choices = c("2009" = "x2009",
+                                "2010" = "x2010",
+                                "2011" = "x2011",
+                                "2012" = "x2012",
+                                "2013" = "x2013",
+                                "2014" = "x2014",
+                                "2015" = "x2015",
+                                "2016" = "x2016",
+                                "2017" = "x2017")
+                                ),
+        
+        selectInput(inputId = "y",
+                    label = "Y-axis:",
+                    choices = c("Total Strikeouts" = "total_SO", 
+                                "Mean Batting Avg" = "mean_BA"),
+                    selected = "total_SO")
       ),
       
       # Show a plot of the generated distribution
       mainPanel(
-         plotOutput("distPlot")
+         plotOutput("scatterplot")
       )
    )
 )
