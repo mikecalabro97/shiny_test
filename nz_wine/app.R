@@ -8,6 +8,10 @@
 #
 
 library(shiny)
+library(tidyverse)
+library(readxl)
+
+data <- read_xlsx("Summary_of_NZ_Wines.xlsx")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
